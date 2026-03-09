@@ -5,27 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Purchase extends Model
+class Sale extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'vendor',
+        'date',
+        'customer_name',
         'wood_type',
         'quantity',
         'unit',
         'unit_price',
-        'discount',
         'total_price',
-        'paid_amount',
     ];
 
     protected $casts = [
+        'date' => 'date',
         'quantity' => 'decimal:2',
         'unit_price' => 'decimal:2',
-        'discount' => 'decimal:2',
         'total_price' => 'decimal:2',
-        'paid_amount' => 'decimal:2',
     ];
 }
 

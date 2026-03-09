@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title -->
-    <title>@yield('title', config('app.name', 'Laxom Admin'))</title>
+    <title>@yield('title', config('app.name', 'Alharamara Admin'))</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">

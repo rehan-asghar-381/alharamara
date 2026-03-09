@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vendor;
+use App\Models\WoodType;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,15 @@ class PurchaseController extends Controller
 
     public function create()
     {
-        return view('admin.purchases.create');
+        $vendors = Vendor::where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        $woodTypes = WoodType::where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.purchases.create', compact('vendors', 'woodTypes'));
     }
 
     public function store(Request $request)
@@ -39,7 +49,15 @@ class PurchaseController extends Controller
 
     public function edit(Purchase $purchase)
     {
-        return view('admin.purchases.edit', compact('purchase'));
+        $vendors = Vendor::where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        $woodTypes = WoodType::where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.purchases.edit', compact('purchase', 'vendors', 'woodTypes'));
     }
 
     public function update(Request $request, Purchase $purchase)
@@ -74,6 +92,7 @@ class PurchaseController extends Controller
             'vendor' => ['required', 'string', 'max:255'],
             'wood_type' => ['required', 'string', 'max:255'],
             'quantity' => ['required', 'numeric', 'min:0.01'],
+            'unit' => ['nullable', 'string', 'max:50'],
             'unit_price' => ['required', 'numeric', 'min:0'],
             'discount' => ['nullable', 'numeric', 'min:0'],
             'paid_amount' => ['required', 'numeric', 'min:0'],
