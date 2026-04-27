@@ -14,7 +14,7 @@
             <nav>
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="menu-header-title">Dashboard</li>
-                    <li class="treeview">
+                    <li>
                         <a class="menu-active" href="{{ route('admin.dashboard') }}">
                             <i class='bx bx-home-heart'></i>
                             <span>Dashboard</span>
