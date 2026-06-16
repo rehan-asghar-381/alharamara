@@ -19,7 +19,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <div class="form-group mb-3">
             <label for="customer_name">Customer Name</label>
             <input
@@ -36,7 +36,7 @@
                 </span>
             @enderror
         </div>
-    </div>
+    </div> --}}
     <div class="col-md-4">
         <div class="form-group mb-3">
             <label for="wood_type">Wood Type</label>
@@ -100,7 +100,7 @@
         <div class="form-group mb-3">
             <label for="unit">Unit</label>
             @php
-                $selectedUnit = old('unit', $sale->unit ?? '');
+                $selectedUnit = old('unit', $sale->unit ?? 'kg');
             @endphp
             <select
                 id="unit"
@@ -142,6 +142,19 @@
             @enderror
         </div>
     </div>
+    {{-- <div class="col-md-3">
+        <div class="form-group mb-3">
+            <label for="discount">Discount</label>
+            <input
+                type="number"
+                step="0.01"
+                id="discount"
+                name="discount"
+                class="form-control"
+                value="{{ old('discount', 0) }}"
+            >
+        </div>
+    </div> --}}
     <div class="col-md-6">
         <div class="form-group mb-3">
             <label>Total Price (auto-calculated)</label>
@@ -183,6 +196,12 @@
                             currentAvailable = parseFloat(response.available) || 0;
                             $('#available_stock').val(currentAvailable ? currentAvailable.toFixed(2) : '0.00');
                             validateQuantity();
+                        }
+
+                        if (typeof response.default_sale_price !== 'undefined') {
+                            var defaultPrice = parseFloat(response.default_sale_price) || 0;
+                            $('#unit_price').val(defaultPrice ? defaultPrice.toFixed(2) : '');
+                            recalcSaleTotal();
                         }
                     }
                 });

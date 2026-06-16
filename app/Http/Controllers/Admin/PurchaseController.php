@@ -43,7 +43,7 @@ class PurchaseController extends Controller
         Purchase::create($validated);
 
         return redirect()
-            ->route('admin.purchases.index')
+            ->route('admin.purchases.create')
             ->with('success', 'Purchase recorded successfully.');
     }
 
@@ -73,7 +73,7 @@ class PurchaseController extends Controller
         $purchase->update($validated);
 
         return redirect()
-            ->route('admin.purchases.index')
+            ->route('admin.purchases.edit', $purchase)
             ->with('success', 'Purchase updated successfully.');
     }
 

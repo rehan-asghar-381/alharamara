@@ -1,7 +1,7 @@
 @csrf
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group mb-3">
             <label for="name">Name</label>
             <input
@@ -19,7 +19,25 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="default_sale_price">Default Sale Price</label>
+            <input
+                type="number"
+                step="0.01"
+                id="default_sale_price"
+                name="default_sale_price"
+                class="form-control @error('default_sale_price') is-invalid @enderror"
+                value="{{ old('default_sale_price', $woodType->default_sale_price ?? '') }}"
+            >
+            @error('default_sale_price')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-4">
         <div class="form-group mb-3">
             <label for="is_active">Status</label>
             <select

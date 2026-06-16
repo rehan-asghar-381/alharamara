@@ -29,7 +29,7 @@ class ExpenseTypeController extends Controller
         ExpenseType::create($data);
 
         return redirect()
-            ->route('admin.expense-types.index')
+            ->route('admin.expense-types.create')
             ->with('success', 'Expense type created successfully.');
     }
 
@@ -45,7 +45,7 @@ class ExpenseTypeController extends Controller
         $expenseType->update($data);
 
         return redirect()
-            ->route('admin.expense-types.index')
+            ->route('admin.expense-types.edit', $expenseType)
             ->with('success', 'Expense type updated successfully.');
     }
 

@@ -29,7 +29,7 @@ class VendorController extends Controller
         Vendor::create($data);
 
         return redirect()
-            ->route('admin.vendors.index')
+            ->route('admin.vendors.create')
             ->with('success', 'Vendor created successfully.');
     }
 
@@ -45,7 +45,7 @@ class VendorController extends Controller
         $vendor->update($data);
 
         return redirect()
-            ->route('admin.vendors.index')
+            ->route('admin.vendors.edit', $vendor)
             ->with('success', 'Vendor updated successfully.');
     }
 

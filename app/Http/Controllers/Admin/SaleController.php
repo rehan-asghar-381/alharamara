@@ -34,6 +34,7 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData($request);
+        $data['customer_name'] = 'Walk-in Customer';
 
         $available = $this->getAvailableStock($data['wood_type']);
         if ($data['quantity'] > $available) {
@@ -49,7 +50,7 @@ class SaleController extends Controller
         Sale::create($data);
 
         return redirect()
-            ->route('admin.sales.index')
+            ->route('admin.sales.create')
             ->with('success', 'Sale recorded successfully.');
     }
 
@@ -65,6 +66,7 @@ class SaleController extends Controller
     public function update(Request $request, Sale $sale)
     {
         $data = $this->validateData($request);
+        $data['customer_name'] = $sale->customer_name ?: 'Walk-in Customer';
 
         $available = $this->getAvailableStock($data['wood_type'], $sale);
         if ($data['quantity'] > $available) {
@@ -80,7 +82,7 @@ class SaleController extends Controller
         $sale->update($data);
 
         return redirect()
-            ->route('admin.sales.index')
+            ->route('admin.sales.edit', $sale)
             ->with('success', 'Sale updated successfully.');
     }
 
@@ -97,7 +99,6 @@ class SaleController extends Controller
     {
         return $request->validate([
             'date' => ['required', 'date'],
-            'customer_name' => ['required', 'string', 'max:255'],
             'wood_type' => ['required', 'string', 'max:255'],
             'quantity' => ['required', 'numeric', 'min:0.01'],
             'unit' => ['nullable', 'string', 'max:50'],
@@ -134,9 +135,11 @@ class SaleController extends Controller
         ]);
 
         $available = $this->getAvailableStock($data['wood_type']);
+        $woodType = WoodType::where('name', $data['wood_type'])->first();
 
         return response()->json([
             'available' => $available,
+            'default_sale_price' => (float) ($woodType->default_sale_price ?? 0),
         ]);
     }
 }

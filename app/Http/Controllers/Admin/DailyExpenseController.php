@@ -38,7 +38,7 @@ class DailyExpenseController extends Controller
         DailyExpense::create($data);
 
         return redirect()
-            ->route('admin.daily-expenses.index')
+            ->route('admin.daily-expenses.create')
             ->with('success', 'Daily expense recorded successfully.');
     }
 
@@ -58,7 +58,7 @@ class DailyExpenseController extends Controller
         $dailyExpense->update($data);
 
         return redirect()
-            ->route('admin.daily-expenses.index')
+            ->route('admin.daily-expenses.edit', $dailyExpense)
             ->with('success', 'Daily expense updated successfully.');
     }
 

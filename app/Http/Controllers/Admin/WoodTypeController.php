@@ -29,7 +29,7 @@ class WoodTypeController extends Controller
         WoodType::create($data);
 
         return redirect()
-            ->route('admin.wood-types.index')
+            ->route('admin.wood-types.create')
             ->with('success', 'Wood type created successfully.');
     }
 
@@ -45,7 +45,7 @@ class WoodTypeController extends Controller
         $woodType->update($data);
 
         return redirect()
-            ->route('admin.wood-types.index')
+            ->route('admin.wood-types.edit', $woodType)
             ->with('success', 'Wood type updated successfully.');
     }
 
@@ -69,6 +69,7 @@ class WoodTypeController extends Controller
         return $request->validate([
             'name' => ['required', 'string', 'max:255', $uniqueRule],
             'description' => ['nullable', 'string'],
+            'default_sale_price' => ['nullable', 'numeric', 'min:0'],
             'is_active' => ['sometimes', 'boolean'],
         ]);
     }

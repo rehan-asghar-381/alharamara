@@ -75,23 +75,20 @@
                     <li class="menu-header-title">Settings</li>
                     <li>
                         <a href="{{ route('admin.wood-types.index') }}">
-                            <i class="bx bx-tree"></i>
+                            <i class="bx bx-list-check"></i>
                             <span>Wood Types</span>
-                            <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.vendors.index') }}">
                             <i class="bx bx-store-alt"></i>
                             <span>Vendors</span>
-                            <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.expense-types.index') }}">
                             <i class="bx bx-list-check"></i>
                             <span>Expense Types</span>
-                            <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
                 </ul>

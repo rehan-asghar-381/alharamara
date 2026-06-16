@@ -12,10 +12,12 @@ class WoodType extends Model
     protected $fillable = [
         'name',
         'description',
+        'default_sale_price',
         'is_active',
     ];
 
     protected $casts = [
+        'default_sale_price' => 'decimal:2',
         'is_active' => 'boolean',
     ];
 }
